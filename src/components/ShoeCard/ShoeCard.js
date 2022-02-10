@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { keyframes } from "styled-components";
 
 import { WEIGHTS } from '../../constants';
 import { formatPrice, pluralize, isNewShoe } from '../../utils';
@@ -38,7 +39,7 @@ const ShoeCard = ({
           <Image alt="" src={imageSrc} />
           {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
           {variant === 'new-release' && (
-            <NewFlag>Just released!</NewFlag>
+            <NewFlag><FlagText>Just released!</FlagText></NewFlag>
           )}
         </ImageWrapper>
         <Spacer size={12} />
@@ -73,15 +74,37 @@ const Link = styled.a`
   color: inherit;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+position: relative;
+`;
 
 const ImageWrapper = styled.div`
-  position: relative;
+  overflow: hidden;
+  border-radius: 16px 16px 4px 4px;
 `;
 
 const Image = styled.img`
+  display: block;
   width: 100%;
-  border-radius: 16px 16px 4px 4px;
+  transform-origin: 50% 80%;
+  transition: transform 500ms;
+  @media (hover: hover) and (prefers-reduced-motion: no-preference){
+    ${Link}:hover &,
+    ${Link}:focus &{
+      transform: scale(1.1);
+      transition: transform 150ms;
+    }
+  }
+  
+`;
+
+const shake = keyframes`
+  from{
+    transform: scale(1.1);
+  }
+  to{
+    transform: scale(0.9);
+  }
 `;
 
 const Row = styled.div`
@@ -129,5 +152,12 @@ const SaleFlag = styled(Flag)`
 const NewFlag = styled(Flag)`
   background-color: var(--color-secondary);
 `;
+
+const FlagText = styled.span`
+display: inline-block;
+ ${Link}:hover &{
+    animation: ${shake} 300ms ease-out;
+  }
+`
 
 export default ShoeCard;
