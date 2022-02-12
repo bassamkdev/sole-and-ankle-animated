@@ -20,12 +20,30 @@ const Header = () => {
           <Logo />
         </LogoWrapper>
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/sale">
+            <NavLinkText>Sale</NavLinkText>
+            <NavLinkText>Sale</NavLinkText>
+          </NavLink>
+          <NavLink href="/new">
+            <NavLinkText>New&nbsp;Releases</NavLinkText>
+            <NavLinkText>New&nbsp;Releases</NavLinkText>
+          </NavLink>
+          <NavLink href="/men">
+            <NavLinkText>men</NavLinkText>
+            <NavLinkText>men</NavLinkText>
+          </NavLink>
+          <NavLink href="/women">
+            <NavLinkText>women</NavLinkText>
+            <NavLinkText>women</NavLinkText>
+          </NavLink>
+          <NavLink href="/kids">
+            <NavLinkText>kids</NavLinkText>
+            <NavLinkText>kids</NavLinkText>
+          </NavLink>
+          <NavLink href="/collections">
+            <NavLinkText>collections</NavLinkText>
+            <NavLinkText>collections</NavLinkText>
+          </NavLink>
         </DesktopNav>
         <MobileActions>
           <ShoppingBagButton>
@@ -120,10 +138,23 @@ const NavLink = styled.a`
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
-
+  display: flex;
+  flex-direction: column;
+  height: 27px;
+  overflow: hidden;
   &:first-of-type {
     color: var(--color-secondary);
   }
+
 `;
+
+const NavLinkText = styled.span`
+display: block;
+transition: transform 250ms;
+${NavLink}:hover &{
+    transform: translateY(-27px);
+  }
+`
+
 
 export default Header;
